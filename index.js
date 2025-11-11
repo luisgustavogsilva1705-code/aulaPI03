@@ -19,7 +19,7 @@ server.get("/",(requisicao, resposta)=>{
                 <html>
                 <head>
                     <meta charset="UTF-8">
-                    <title>Cadastro do Cliente</title>
+                    <title>Login</title>
                 </head>
 
                 <body style="margin: 0; padding: 0; font-family: Arial, sans-serif; background-color: #f0f2f5; height: 100vh; display: flex; align-items: center; justify-content: center;">
@@ -30,14 +30,14 @@ server.get("/",(requisicao, resposta)=>{
 
                     <div style="margin-bottom: 20px; text-align: left;">
                         <label for="exampleInputEmail1" style="display: block; font-weight: bold; margin-bottom: 6px; color: #555;">Email</label>
-                        <input type="email" id="exampleInputEmail1" name="email" required
+                        <input type="email" id="exampleInputEmail1" name="email" 
                         style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; box-sizing: border-box;">
                         <div style="font-size: 12px; color: #777; margin-top: 4px;">Nunca compartilharemos seu email com ninguém.</div>
                     </div>
 
                     <div style="margin-bottom: 20px; text-align: left;">
                         <label for="exampleInputPassword1" style="display: block; font-weight: bold; margin-bottom: 6px; color: #555;">Senha</label>
-                        <input type="password" id="exampleInputPassword1" name="senha" required
+                        <input type="password" id="exampleInputPassword1" name="senha" 
                         style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; box-sizing: border-box;">
                     </div>
 
@@ -70,7 +70,7 @@ server.get("/telaMenu",(requisicao, resposta)=>{
 
             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
             <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Login</button>
+                <a class="nav-link active" href="/" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Login</a>
             </li>
             <li class="nav-item" role="presentation">
                 <a class="nav-link" href="/cadastroFornecedor" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Cadastrar</a>
@@ -111,63 +111,63 @@ server.get("/cadastroFornecedor", (requisicao, resposta)=>{
                 
                 <div style="margin-bottom: 15px; text-align: left;">
                     <label for="cnpj" style="display: block; font-weight: bold; margin-bottom: 6px; color: #555;">CNPJ</label>
-                    <input type="text" id="cnpj" name="cnpj" required
+                    <input type="text" id="cnpj" name="cnpj" 
                         style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px;">
                 </div>
 
                 
                 <div style="margin-bottom: 15px; text-align: left;">
                     <label for="razaoSocial" style="display: block; font-weight: bold; margin-bottom: 6px; color: #555;">Razão Social / Nome do Fornecedor</label>
-                    <input type="text" id="razaoSocial" name="razaoSocial" required
+                    <input type="text" id="razaoSocial" name="razaoSocial" 
                         style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px;">
                 </div>
 
                 
                 <div style="margin-bottom: 15px; text-align: left;">
                     <label for="nomeFantasia" style="display: block; font-weight: bold; margin-bottom: 6px; color: #555;">Nome Fantasia</label>
-                    <input type="text" id="nomeFantasia" name="nomeFantasia" required
+                    <input type="text" id="nomeFantasia" name="nomeFantasia" 
                         style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px;">
                 </div>
 
                 
                 <div style="margin-bottom: 15px; text-align: left;">
                     <label for="endereco" style="display: block; font-weight: bold; margin-bottom: 6px; color: #555;">Endereço</label>
-                    <input type="text" id="endereco" name="endereco" required
+                    <input type="text" id="endereco" name="endereco" 
                         style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px;">
                 </div>
 
                 
                 <div style="margin-bottom: 15px; text-align: left;">
                     <label for="cidade" style="display: block; font-weight: bold; margin-bottom: 6px; color: #555;">Cidade</label>
-                    <input type="text" id="cidade" name="cidade" required
+                    <input type="text" id="cidade" name="cidade" 
                         style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px;">
                 </div>
 
                 
                 <div style="margin-bottom: 15px; text-align: left;">
                     <label for="uf" style="display: block; font-weight: bold; margin-bottom: 6px; color: #555;">UF</label>
-                    <input type="text" id="uf" name="uf" maxlength="2" required
+                    <input type="text" id="uf" name="uf" maxlength="2" 
                         style="width: 60px; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; text-transform: uppercase;">
                 </div>
 
                 
                 <div style="margin-bottom: 15px; text-align: left;">
                     <label for="cep" style="display: block; font-weight: bold; margin-bottom: 6px; color: #555;">CEP</label>
-                    <input type="text" id="cep" name="cep" required
+                    <input type="text" id="cep" name="cep" 
                         style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px;">
                 </div>
 
                 
                 <div style="margin-bottom: 15px; text-align: left;">
                     <label for="email" style="display: block; font-weight: bold; margin-bottom: 6px; color: #555;">Email</label>
-                    <input type="email" id="email" name="email" required
+                    <input type="text" id="email" name="email" 
                         style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px;">
                 </div>
 
                
                 <div style="margin-bottom: 20px; text-align: left;">
                     <label for="telefone" style="display: block; font-weight: bold; margin-bottom: 6px; color: #555;">Telefone</label>
-                    <input type="tel" id="telefone" name="telefone" required
+                    <input type="tel" id="telefone" name="telefone" 
                         style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px;">
                 </div>
 
@@ -184,6 +184,9 @@ server.get("/cadastroFornecedor", (requisicao, resposta)=>{
 
 });
 
+server.use(express.urlencoded({extended: true}));
+
+
 server.post('/cadastroFornecedor', (requisicao, resposta)=>{
     const cnpj= requisicao.body.cnpj;
     const razaoSocial= requisicao.body.razaoSocial;
@@ -195,6 +198,66 @@ server.post('/cadastroFornecedor', (requisicao, resposta)=>{
     const email= requisicao.body.email;
     const telefone=requisicao.body.telefone;
 
+    lista_fornecedores.push({cnpj,razaoSocial,nomeFantasia,endereco,cidade,uf,cep,email,telefone});
+    resposta.redirect("/lista_cadastro");
+
+
+
+});
+
+
+
+server.get("/lista_cadastro", (requisicao, resposta)=>{
+    let conteudo=`
+        <!DOCTYPE html>
+        <html>
+            <head>
+                <meta charset="UTF-8">
+                <title>Menu</title>
+                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+            </head>
+            <body>
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>CNPJ</th>
+                            <th>Razão Social</th>
+                            <th>Fantasia</th>
+                            <th>Endereço</th>
+                            <th>Cidade</th>
+                            <th>UF</th>
+                            <th>CEP</th>
+                            <th>Email</th>
+                            <th>Telefone</th>
+                        </tr>
+                    </thead>
+                    <tbody>`;
+            for (let i= 0; i<lista_fornecedores.length; i++)
+            {
+                conteudo+=`
+                <tr>
+                    <td>${lista_fornecedores[i].cnpj}</td>
+                    <td>${lista_fornecedores[i].razaoSocial} </td>
+                    <td>${lista_fornecedores[i].nomeFantasia} </td>
+                    <td>${lista_fornecedores[i].endereco} </td>
+                    <td>${lista_fornecedores[i].cidade} </td>
+                    <td>${lista_fornecedores[i].uf} </td>
+                    <td>${lista_fornecedores[i].cep} </td>
+                    <td>${lista_fornecedores[i].email} </td>
+                    <td>${lista_fornecedores[i].telefone} </td>
+
+                </tr>
+              
+                `;
+            }
+            conteudo+=`
+                </tbody>
+                </table>
+
+            </body>
+        </html>`
+
+        resposta.send(conteudo);
 });
 
 // server.get("/", (requisicao, resposta)=>{
@@ -236,6 +299,7 @@ server.post('/cadastroFornecedor', (requisicao, resposta)=>{
 //         </html>
 //         `);
 // });
+
 
 server.post('/', (requisicao, resposta) =>{
     const nome= requisicao.body.nome;
