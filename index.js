@@ -27,6 +27,7 @@ server.get("/",(requisicao, resposta)=>{
                     
                     <form method="POST" action="/" style="background-color: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 320px; text-align: center;">
                     <h2 style="margin-bottom: 25px; color: #333;">Login</h2>
+                    <p>(admin@email.com<br>senha: 1234)</p>
 
                     <div style="margin-bottom: 20px; text-align: left;">
                         <label for="exampleInputEmail1" style="display: block; font-weight: bold; margin-bottom: 6px; color: #555;">Email</label>
@@ -79,6 +80,7 @@ server.post('/', (requisicao, resposta)=>{
                     
                     <form method="POST" action="/" style="background-color: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 320px; text-align: center;">
                     <h2 style="margin-bottom: 25px; color: #333;">Login</h2>
+                    <p>(admin@email.com<br>senha:1234)</p>
 
                     <div style="margin-bottom: 20px; text-align: left;">
                         <label for="exampleInputEmail1" style="display: block; font-weight: bold; margin-bottom: 6px; color: #555;">Email</label>
