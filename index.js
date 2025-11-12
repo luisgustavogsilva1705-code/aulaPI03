@@ -3,7 +3,7 @@ import express, { response } from "express";
 
 const host ="0.0.0.0";
 const porta = 3000;
-// var lista_usuario= [];
+var lista_login=[];
 const server = express();
 var lista_fornecedores=[];
 
@@ -24,15 +24,14 @@ server.get("/",(requisicao, resposta)=>{
 
                 <body style="margin: 0; padding: 0; font-family: Arial, sans-serif; background-color: #f0f2f5; height: 100vh; display: flex; align-items: center; justify-content: center;">
 
-                    <!-- alterado apenas o "action" para /telaMenu e mantido method="POST" -->
-                    <form method="POST" action="/telaMenu" style="background-color: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 320px; text-align: center;">
+                    
+                    <form method="POST" action="/" style="background-color: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 320px; text-align: center;">
                     <h2 style="margin-bottom: 25px; color: #333;">Login</h2>
 
                     <div style="margin-bottom: 20px; text-align: left;">
                         <label for="exampleInputEmail1" style="display: block; font-weight: bold; margin-bottom: 6px; color: #555;">Email</label>
-                        <input type="email" id="exampleInputEmail1" name="email" 
+                        <input type="email" id="exampleInputEmail1" name="Email" 
                         style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; box-sizing: border-box;">
-                        <div style="font-size: 12px; color: #777; margin-top: 4px;">Nunca compartilharemos seu email com ninguém.</div>
                     </div>
 
                     <div style="margin-bottom: 20px; text-align: left;">
@@ -50,6 +49,78 @@ server.get("/",(requisicao, resposta)=>{
                 </body>
                 </html>
         `);
+
+});
+
+server.post('/', (requisicao, resposta)=>{
+    const Email = requisicao.body.Email;
+    const senha = requisicao.body.senha;
+
+    let senha_correta = "1234";
+    let email_correto = 'admin@email.com';
+    if(Email === email_correto && senha === senha_correta)
+    {
+        lista_login.push({Email,senha});
+        resposta.redirect("/telaMenu");
+    }
+    else
+    {  
+        let conteudo =
+        `
+        <!DOCTYPE html>
+                <html>
+                <head>
+                    <meta charset="UTF-8">
+                    <title>Login</title>
+                </head>
+
+                <body style="margin: 0; padding: 0; font-family: Arial, sans-serif; background-color: #f0f2f5; height: 100vh; display: flex; align-items: center; justify-content: center;">
+
+                    
+                    <form method="POST" action="/" style="background-color: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 320px; text-align: center;">
+                    <h2 style="margin-bottom: 25px; color: #333;">Login</h2>
+
+                    <div style="margin-bottom: 20px; text-align: left;">
+                        <label for="exampleInputEmail1" style="display: block; font-weight: bold; margin-bottom: 6px; color: #555;">Email</label>
+                        <input type="email" id="exampleInputEmail1" name="Email" 
+                        style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; box-sizing: border-box;">
+                    </div>`
+        if(Email !== email_correto)
+        {
+            conteudo+=
+            `
+                <div>
+                    <p style="color: red; font-size: 15px" >Email incorreto</p>
+                </div>
+            `
+        }
+        conteudo+=`
+                    <div style="margin-bottom: 20px; text-align: left;">
+                        <label for="exampleInputPassword1" style="display: block; font-weight: bold; margin-bottom: 6px; color: #555;">Senha</label>
+                        <input type="password" id="exampleInputPassword1" name="senha" 
+                        style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; box-sizing: border-box;">
+                    </div>`
+        if(senha !== senha_correta)
+        {
+            conteudo+=
+            `
+                <div>
+                    <p style="color: red; font-size: 15px" >Senha incorreto</p>
+                </div>
+            `
+        }
+        conteudo+=`
+                    <button type="submit"
+                        style="width: 100%; background-color: #2E8B57; color: white; border: none; padding: 10px 0; border-radius: 6px; font-size: 16px; cursor: pointer; transition: background-color 0.2s;">
+                        Entrar
+                    </button>
+                    </form>
+
+                </body>
+                </html>
+        `
+        resposta.send(conteudo);
+    }
 
 });
 
@@ -80,7 +151,9 @@ server.get("/telaMenu",(requisicao, resposta)=>{
             </li>
             </ul>
             <div class="tab-content" id="pills-tabContent">
-            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">Cadastro de Fornecedor</div>
+            // <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">Cadastro de Fornecedor</div>
+            <br>
+            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" style="color: green">Login Realizado Com Sucesso!!!</div>
             </div>
 
         </body>
@@ -198,10 +271,166 @@ server.post('/cadastroFornecedor', (requisicao, resposta)=>{
     const email= requisicao.body.email;
     const telefone=requisicao.body.telefone;
 
-    lista_fornecedores.push({cnpj,razaoSocial,nomeFantasia,endereco,cidade,uf,cep,email,telefone});
-    resposta.redirect("/lista_cadastro");
 
+    if(cnpj && razaoSocial && nomeFantasia && endereco && cidade && uf && cep && email && telefone)
+    {
+        lista_fornecedores.push({cnpj,razaoSocial,nomeFantasia,endereco,cidade,uf,cep,email,telefone});
+        resposta.redirect("/lista_cadastro");
+    }
+    else
+    {
+        let conteudo = `
 
+            <!DOCTYPE html>
+        <html>
+            <head>
+                <meta charset="UTF-8">
+                <title>Menu</title>
+                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+            </head>
+
+       <body style="margin: 0; padding: 0; padding-top: 50%; font-family: Arial, sans-serif; background-color: #f0f2f5; height: 100vh; display: flex; align-items: center; justify-content: center;">
+
+            <form method="POST" action="/cadastroFornecedor" 
+                style="background-color: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 380px; text-align: center;">
+
+                <h2 style="margin-bottom: 25px; color: #333;">Cadastro de Fornecedor</h2>
+
+                
+                <div style="margin-bottom: 15px; text-align: left;">
+                    <label for="cnpj" style="display: block; font-weight: bold; margin-bottom: 6px; color: #555;">CNPJ</label>
+                    <input type="text" id="cnpj" name="cnpj" value="${cnpj}"
+                        style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px;">
+                </div>`
+        if(!cnpj)
+        {
+            conteudo+=`<div>
+                <p style="color: red";>Por gentileza, informe o CNPJ</p>
+            </div>`
+        }
+
+        conteudo+=`     
+                <div style="margin-bottom: 15px; text-align: left;">
+                    <label for="razaoSocial" style="display: block; font-weight: bold; margin-bottom: 6px; color: #555;">Razão Social / Nome do Fornecedor</label>
+                    <input type="text" id="razaoSocial" name="razaoSocial" value="${razaoSocial}"
+                        style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px;">
+                </div>`
+        if(!razaoSocial)
+        {
+            conteudo+=
+            `<div>
+                <p style="color: red";>Por gentileza, informe a razão social/Nome do Fornecedor </p>
+            </div>`
+        }
+
+        conteudo+=`              
+                <div style="margin-bottom: 15px; text-align: left;">
+                    <label for="nomeFantasia" style="display: block; font-weight: bold; margin-bottom: 6px; color: #555;">Nome Fantasia</label>
+                    <input type="text" id="nomeFantasia" name="nomeFantasia" value="${nomeFantasia}"
+                        style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px;">
+                </div>`
+        if(!nomeFantasia)
+        {
+            conteudo+=
+            `<div>
+                <p style="color: red";>Por gentileza, informe o Nome Fantasia</p>
+            </div>`
+        }
+
+        conteudo+=`
+                <div style="margin-bottom: 15px; text-align: left;">
+                    <label for="endereco" style="display: block; font-weight: bold; margin-bottom: 6px; color: #555;">Endereço</label>
+                    <input type="text" id="endereco" name="endereco" value="${endereco}"
+                        style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px;">
+                </div>`
+        if(!endereco)
+        {
+            conteudo+=
+            `<div>
+                <p style="color: red";>Por gentileza, informe o Endereço</p>
+            </div>`
+        }
+
+        conteudo+=`   
+                <div style="margin-bottom: 15px; text-align: left;">
+                    <label for="cidade" style="display: block; font-weight: bold; margin-bottom: 6px; color: #555;">Cidade</label>
+                    <input type="text" id="cidade" name="cidade" value="${cidade}"
+                        style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px;">
+                </div>`
+         if(!cidade)
+        {
+            conteudo+=
+            `<div>
+                <p style="color: red";>Por gentileza, informe a Cidade</p>
+            </div>`
+        }
+
+        conteudo+=`                
+                <div style="margin-bottom: 15px; text-align: left;">
+                    <label for="uf" style="display: block; font-weight: bold; margin-bottom: 6px; color: #555;">UF</label>
+                    <input type="text" id="uf" name="uf" maxlength="2" value="${uf}"
+                        style="width: 60px; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px; text-transform: uppercase;">
+                </div>`
+         if(!uf)
+        {
+            conteudo+=
+            `<div>
+                <p style="color: red";>Por gentileza, informe o UF</p>
+            </div>`
+        }
+
+        conteudo+=`            
+                <div style="margin-bottom: 15px; text-align: left;">
+                    <label for="cep" style="display: block; font-weight: bold; margin-bottom: 6px; color: #555;">CEP</label>
+                    <input type="text" id="cep" name="cep" value="${cep}"
+                        style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px;">
+                </div>`
+         if(!cep)
+        {
+            conteudo+=
+            `<div>
+                <p style="color: red";>Por gentileza, informe o CEP</p>
+            </div>`
+        }
+        conteudo+=`
+                <div style="margin-bottom: 15px; text-align: left;">
+                    <label for="email" style="display: block; font-weight: bold; margin-bottom: 6px; color: #555;">Email</label>
+                    <input type="text" id="email" name="email" value="${email}"
+                        style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px;">
+                </div>`
+         if(!email)
+        {
+            conteudo+=
+            `<div>
+                <p style="color: red";>Por gentileza, informe o EMAIL</p>
+            </div>`
+        }
+        conteudo+=` 
+                <div style="margin-bottom: 20px; text-align: left;">
+                    <label for="telefone" style="display: block; font-weight: bold; margin-bottom: 6px; color: #555;">Telefone</label>
+                    <input type="tel" id="telefone" name="telefone" value="${telefone}"
+                        style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 14px;">
+                </div>`
+         if(!telefone)
+        {
+            conteudo+=
+            `<div>
+                <p style="color: red";>Por gentileza, informe o Telefone</p>
+            </div>`
+        }
+        conteudo+=`
+                <button type="submit"
+                    style="width: 100%; background-color: #2E8B57; color: white; border: none; padding: 10px 0; border-radius: 6px; font-size: 16px; cursor: pointer; transition: background-color 0.2s;">
+                    Cadastrar
+                </button>
+            </form>
+
+        </body>
+        </html>
+
+        `
+        resposta.send(conteudo);
+    }
 
 });
 
@@ -399,7 +628,6 @@ server.post('/', (requisicao, resposta) =>{
         `;
 
         resposta.send(conteudo); 
-
     }
     
 });
